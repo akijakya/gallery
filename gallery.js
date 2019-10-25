@@ -55,31 +55,14 @@ function showPicture (x) {
 
 showPicture(currentIndex);
 
-let leftArrow = document.getElementById("arrow-left");
-
-leftArrow.onclick = function() {
-	if (currentPicture.dataset.index > 0) {
-		showPicture(currentIndex - 1);
-	} 
-}
-
-let rightArrow = document.getElementById("arrow-right");
-
-rightArrow.onclick = function() {
-	if (currentPicture.dataset.index < images.length - 1) { 
-        showPicture(currentIndex + 1);
-	} 
-}
-
 let thumbnailList = document.getElementById("picture-list").getElementsByTagName("ul")[0];
 let clickedThumbnail;
 
 for (let i = 0; i < images.length; i++) {
     let thumbnail = document.createElement("img");
     thumbnail.setAttribute("src", images[i].src);
-    thumbnail.setAttribute("alt", images[i].alt);
-    thumbnail.setAttribute("data-desc", images[i].description);
     thumbnail.setAttribute ("class", "notclicked");
+    thumbnail.setAttribute ("id", i);
 
     if (images[i].needRotation === true) {
         thumbnail.setAttribute("style", "transform: rotate(90deg)");
@@ -87,12 +70,14 @@ for (let i = 0; i < images.length; i++) {
 
     if (i === 0) {
         clickedThumbnail = thumbnail;
+        clickedThumbnail.setAttribute ("class", "clicked");
     }
 
     let newLi = document.createElement("li");
     newLi.appendChild(thumbnail);
     
     thumbnailList.appendChild(newLi);
+
     thumbnail.onclick = function() {
         clickedThumbnail.setAttribute ("class", "notclicked");
         clickedThumbnail = thumbnail;
@@ -101,4 +86,24 @@ for (let i = 0; i < images.length; i++) {
     }
 }
 
-clickedThumbnail.setAttribute ("class", "clicked");
+let leftArrow = document.getElementById("arrow-left");
+leftArrow.onclick = function() {
+	if (currentPicture.dataset.index > 0) {
+        let thumbnailIndex = parseInt(clickedThumbnail.id);
+        clickedThumbnail.setAttribute ("class", "notclicked");
+        clickedThumbnail = thumbnailList.getElementsByTagName("li")[thumbnailIndex - 1].getElementsByTagName("img")[0];
+        clickedThumbnail.setAttribute ("class", "clicked");
+		showPicture(currentIndex - 1);
+	} 
+}
+
+let rightArrow = document.getElementById("arrow-right");
+rightArrow.onclick = function() {
+	if (currentPicture.dataset.index < images.length - 1) { 
+        let thumbnailIndex = parseInt(clickedThumbnail.id);
+        clickedThumbnail.setAttribute ("class", "notclicked");
+        clickedThumbnail = thumbnailList.getElementsByTagName("li")[thumbnailIndex + 1].getElementsByTagName("img")[0];
+        clickedThumbnail.setAttribute ("class", "clicked");
+        showPicture(currentIndex + 1);
+	} 
+}
