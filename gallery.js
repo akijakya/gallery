@@ -16,17 +16,19 @@ let images = [
 let pictureList = document.getElementById("picture-list").getElementsByTagName("ul")[0];
 
 for (let i = 0; i < images.length; i++) {
-    let newImg = document.createElement("img");
-    newImg.setAttribute("src", images[i].src);
-    newImg.setAttribute("alt", images[i].alt);
-    newImg.setAttribute("data-desc", images[i].description);
+    let thumbnail = document.createElement("img");
+    thumbnail.setAttribute("src", images[i].src);
+    thumbnail.setAttribute("alt", images[i].alt);
+    thumbnail.setAttribute("data-desc", images[i].description);
 
     if (images[i].needRotation === true) {
-        newImg.setAttribute("style", "transform: rotate(90deg)");
+        thumbnail.setAttribute("style", "transform: rotate(90deg)");
     }
-    
+
     let newLi = document.createElement("li");
-    newLi.appendChild(newImg);
+    newLi.setAttribute("id", i);
+
+    newLi.appendChild(thumbnail);
     pictureList.appendChild(newLi);
 }
 
@@ -72,7 +74,7 @@ function showPicture (x) {
 
 showPicture(currentIndex);
 
-var leftArrow = document.getElementById("arrow-left");
+let leftArrow = document.getElementById("arrow-left");
 
 leftArrow.onclick = function() {
 	if (currentPicture.dataset.index > 0) {
@@ -80,7 +82,7 @@ leftArrow.onclick = function() {
 	} 
 }
 
-var rightArrow = document.getElementById("arrow-right");
+let rightArrow = document.getElementById("arrow-right");
 
 rightArrow.onclick = function() {
 	if (currentPicture.dataset.index < images.length - 1) { 
