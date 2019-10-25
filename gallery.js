@@ -6,10 +6,10 @@ let images = [
     {src: "static\\img\\IMG_20191016_095716.jpg", alt: "Eger", description: "The castle of Eger on the inside"},
     {src: "static\\img\\IMG_20191016_141747.jpg", alt: "Szalajka-völgy", description: "The field which is the end station of the little engine from Szilvásvárad"},
     {src: "static\\img\\IMG_20191016_142132.jpg", alt: "Szalajka-völgy", description: "A beautiful lake from which the water streams in the direction of the road back to Szilvásvárad"},
-    {src: "static\\img\\IMG_20191016_143841.jpg", alt: "Szalajka-völgy", description: "The so-called \"Fátyol-vízesés\""},
+    {src: "static\\img\\IMG_20191016_143841.jpg", alt: "Szalajka-völgy", description: "The so-called \"Fátyol-vízesés\"", needRotation: true},
     {src: "static\\img\\IMG_20191016_144513.jpg", alt: "Szalajka-völgy", description: "The forest roads are beautiful in the autumn"},
-    {src: "static\\img\\IMG_20191016_145017.jpg", alt: "Szalajka-völgy", description: "The source of a stream"},
-    {src: "static\\img\\IMG_20191017_111420.jpg", alt: "Sirok", description: "The entrance of the Sirok castle"},
+    {src: "static\\img\\IMG_20191016_145017.jpg", alt: "Szalajka-völgy", description: "The source of a stream", needRotation: true},
+    {src: "static\\img\\IMG_20191017_111420.jpg", alt: "Sirok", description: "The entrance of the Sirok castle", needRotation: true},
     {src: "static\\img\\IMG_20191017_112516.jpg", alt: "Sirok", description: "The view on the village of Sirok from the castle"}
 ]
 
@@ -20,6 +20,11 @@ for (let i = 0; i < images.length; i++) {
     newImg.setAttribute("src", images[i].src);
     newImg.setAttribute("alt", images[i].alt);
     newImg.setAttribute("data-desc", images[i].description);
+
+    if (images[i].needRotation === true) {
+        newImg.setAttribute("style", "transform: rotate(90deg)");
+    }
+    
     let newLi = document.createElement("li");
     newLi.appendChild(newImg);
     pictureList.appendChild(newLi);
@@ -44,6 +49,11 @@ function showPicture (x) {
     newPicture.setAttribute("data-desc", images[x].description);
     newPicture.setAttribute("class", "picture");
     newPicture.setAttribute("data-index", x);
+
+    if (images[x].needRotation === true) {
+        newPicture.setAttribute("style", "transform: rotate(90deg)");
+    }
+
     pictureBox.appendChild(newPicture);
     currentPicture = newPicture;
 
