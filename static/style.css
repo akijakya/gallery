@@ -50,6 +50,7 @@ body {
 }
 
 .text-box {
+    width: 100%;
     box-sizing: border-box;
     position: absolute;
     max-height: 30%;

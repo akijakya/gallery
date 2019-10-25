@@ -40,8 +40,8 @@ let currentPicture = document.getElementsByClassName("picture-box")[0].getElemen
 let newHeader = document.createElement("h1");
 newHeader.textContent = currentPicture.alt;
 let newParagraph = document.createElement("p");
-newParagraph.textContent = currentPicture.description;
-console.log(currentPicture);
+newParagraph.textContent = images[0].description;
+console.log(newParagraph);
 textBox.appendChild(newHeader);
 textBox.appendChild(newParagraph);
 pictureBox.appendChild(textBox);
