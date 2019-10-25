@@ -14,34 +14,66 @@ let images = [
 ]
 
 let pictureList = document.getElementById("picture-list").getElementsByTagName("ul")[0];
-console.log(pictureList);
 
 for (let i = 0; i < images.length; i++) {
     let newImg = document.createElement("img");
     newImg.setAttribute("src", images[i].src);
     newImg.setAttribute("alt", images[i].alt);
-    newImg.setAttribute("description", images[i].description);
+    newImg.setAttribute("data-desc", images[i].description);
     let newLi = document.createElement("li");
     newLi.appendChild(newImg);
     pictureList.appendChild(newLi);
 }
 
-let pictureBox = document.getElementsByClassName("picture-box")[0];
-let newPicture = document.createElement("img");
-newPicture.setAttribute("src", images[0].src);
-newPicture.setAttribute("alt", images[0].alt);
-newPicture.setAttribute("description", images[0].description);
-newPicture.setAttribute("class", "picture");
-pictureBox.appendChild(newPicture);
-
-let textBox = document.createElement("div");
-textBox.setAttribute("class", "text-box");
 let currentPicture = document.getElementsByClassName("picture-box")[0].getElementsByTagName("img")[0];
-let newHeader = document.createElement("h1");
-newHeader.textContent = currentPicture.alt;
-let newParagraph = document.createElement("p");
-newParagraph.textContent = images[0].description;
-console.log(newParagraph);
-textBox.appendChild(newHeader);
-textBox.appendChild(newParagraph);
-pictureBox.appendChild(textBox);
+let currentIndex = 0;
+
+function showPicture (x) {
+    currentIndex = x;
+
+    let pictureBox = document.getElementsByClassName("picture-box")[0];
+
+    if (currentPicture !== undefined) {
+        pictureBox.removeChild(pictureBox.getElementsByTagName("img")[0]);
+        pictureBox.removeChild(pictureBox.getElementsByClassName("text-box")[0]);
+    }
+    
+    let newPicture = document.createElement("img");
+    newPicture.setAttribute("src", images[x].src);
+    newPicture.setAttribute("alt", images[x].alt);
+    newPicture.setAttribute("data-desc", images[x].description);
+    newPicture.setAttribute("class", "picture");
+    newPicture.setAttribute("data-index", x);
+    pictureBox.appendChild(newPicture);
+    currentPicture = newPicture;
+
+    let textBox = document.createElement("div");
+    textBox.setAttribute("class", "text-box");
+    
+    let newHeader = document.createElement("h1");
+    newHeader.textContent = images[x].alt;
+    let newParagraph = document.createElement("p");
+    newParagraph.textContent = images[x].description;
+
+    textBox.appendChild(newHeader);
+    textBox.appendChild(newParagraph);
+    pictureBox.appendChild(textBox);
+}
+
+showPicture(currentIndex);
+
+var leftArrow = document.getElementById("arrow-left");
+
+leftArrow.onclick = function() {
+	if (currentPicture.dataset.index > 0) {
+		showPicture(currentIndex - 1);
+	} 
+}
+
+var rightArrow = document.getElementById("arrow-right");
+
+rightArrow.onclick = function() {
+	if (currentPicture.dataset.index < images.length - 1) { 
+        showPicture(currentIndex + 1);
+	} 
+}

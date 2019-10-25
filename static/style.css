@@ -29,7 +29,7 @@ body {
     background: #eee;
 }
 
-.arrow-right {
+#arrow-right {
     transform: rotate(180deg);
 }
 
@@ -94,7 +94,6 @@ body {
     width: 60px;
     margin: 5px;
     overflow: hidden;
-    background: green;
     image-orientation: from-image;
 }
 
