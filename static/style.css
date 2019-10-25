@@ -1,0 +1,99 @@
+body {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-picture {
+    display: inherit;
+    flex-direction: row;
+    width: 80%;
+    height: auto;
+    overflow: hidden;
+    background: #eee;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-box {
+    display: inherit;
+    flex: 1 1 5%;
+    height: auto;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+}
+
+.arrow-right {
+    transform: rotate(180deg);
+}
+
+.picture-box {
+    display: inherit;
+    flex: 1 1 90%;
+    height: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow-y: hidden;
+    background: black;
+    justify-content: center;
+    align-items: center;
+}
+
+.picture {
+    width: 100%;
+}
+
+.text-box {
+    box-sizing: border-box;
+    position: absolute;
+    max-height: 30%;
+    overflow: hidden;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text-box h1 {
+    color: white;
+    margin: 5px 10px;
+    font-size: larger;
+}
+
+.text-box p {
+    color: white;
+    opacity: 0.5;
+    margin: 5px 10px;
+    font-size: smaller;
+}
+
+#picture-list {
+    display: inherit;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    background: white;
+    overflow-x: auto;
+}
+
+#picture-list ul {
+    display: inherit;
+    padding-left: 0;
+}
+
+#picture-list li {
+    display: inherit;
+    justify-content: center;
+    list-style-type: none;
+    height: 60px;
+    width: 60px;
+    margin: 5px;
+    overflow: hidden;
+    background: green;
+}
+
+#picture-list img {
+    height: 60px;
+}
