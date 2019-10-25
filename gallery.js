@@ -13,25 +13,6 @@ let images = [
     {src: "static\\img\\IMG_20191017_112516.jpg", alt: "Sirok", description: "The view on the village of Sirok from the castle"}
 ]
 
-let pictureList = document.getElementById("picture-list").getElementsByTagName("ul")[0];
-
-for (let i = 0; i < images.length; i++) {
-    let thumbnail = document.createElement("img");
-    thumbnail.setAttribute("src", images[i].src);
-    thumbnail.setAttribute("alt", images[i].alt);
-    thumbnail.setAttribute("data-desc", images[i].description);
-
-    if (images[i].needRotation === true) {
-        thumbnail.setAttribute("style", "transform: rotate(90deg)");
-    }
-
-    let newLi = document.createElement("li");
-    newLi.setAttribute("id", i);
-
-    newLi.appendChild(thumbnail);
-    pictureList.appendChild(newLi);
-}
-
 let currentPicture = document.getElementsByClassName("picture-box")[0].getElementsByTagName("img")[0];
 let currentIndex = 0;
 
@@ -89,3 +70,35 @@ rightArrow.onclick = function() {
         showPicture(currentIndex + 1);
 	} 
 }
+
+let thumbnailList = document.getElementById("picture-list").getElementsByTagName("ul")[0];
+let clickedThumbnail;
+
+for (let i = 0; i < images.length; i++) {
+    let thumbnail = document.createElement("img");
+    thumbnail.setAttribute("src", images[i].src);
+    thumbnail.setAttribute("alt", images[i].alt);
+    thumbnail.setAttribute("data-desc", images[i].description);
+    thumbnail.setAttribute ("class", "notclicked");
+
+    if (images[i].needRotation === true) {
+        thumbnail.setAttribute("style", "transform: rotate(90deg)");
+    }
+
+    if (i === 0) {
+        clickedThumbnail = thumbnail;
+    }
+
+    let newLi = document.createElement("li");
+    newLi.appendChild(thumbnail);
+    
+    thumbnailList.appendChild(newLi);
+    thumbnail.onclick = function() {
+        clickedThumbnail.setAttribute ("class", "notclicked");
+        clickedThumbnail = thumbnail;
+        clickedThumbnail.setAttribute ("class", "clicked");
+        showPicture(i);
+    }
+}
+
+clickedThumbnail.setAttribute ("class", "clicked");
